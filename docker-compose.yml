@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  kafka1:
+    image: bitnami/kafka:latest
+    container_name: kafka1
+    ports:
+      - "9092:9092"
+      - "9094:9094"
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_KRAFT_CLUSTER_ID=kafka_cluster
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_KRAFT_BROKER_ID=1
+      - KAFKA_CFG_KRAFT_BROKER_CLUSTER_ID=my-kafka-cluster
+      - KAFKA_CFG_KRAFT_LOG_DIRS=/bitnami/kafka/data/kraft-logs
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    # volumes:
+    #   - ./data/kafka1:/bitnami/kafka/data
+
+  kafka2:
+    image: bitnami/kafka:latest
+    container_name: kafka2
+    ports:
+      - "9095:9092"
+      - "9096:9094"
+    environment:
+      - KAFKA_CFG_NODE_ID=2
+      - KAFKA_KRAFT_CLUSTER_ID=kafka_cluster
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9096
+      - KAFKA_CFG_KRAFT_BROKER_ID=2
+      - KAFKA_CFG_KRAFT_BROKER_CLUSTER_ID=my-kafka-cluster
+      - KAFKA_CFG_KRAFT_LOG_DIRS=/bitnami/kafka/data/kraft-logs
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - ALLOW_PLAINTEXT_LISTENER=yes
+  #   # volumes:
+  #   #   - ./data/kafka2:/bitnami/kafka/data
+
+  kafka3:
+    image: bitnami/kafka:latest
+    container_name: kafka3
+    ports:
+      - "9097:9092"
+      - "9098:9094"
+    environment:
+      - KAFKA_CFG_NODE_ID=3
+      - KAFKA_KRAFT_CLUSTER_ID=kafka_cluster
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9098
+      - KAFKA_CFG_KRAFT_BROKER_ID=3
+      - KAFKA_CFG_KRAFT_BROKER_CLUSTER_ID=my-kafka-cluster
+      - KAFKA_CFG_KRAFT_LOG_DIRS=/bitnami/kafka/data/kraft-logs
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    # volumes:
+    #   - ./data/kafka3:/bitnami/kafka/data
