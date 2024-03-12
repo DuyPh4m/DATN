@@ -1,0 +1,128 @@
+<mxfile host="app.diagrams.net" modified="2024-03-12T09:56:05.424Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0" etag="WmUvof-CMjRtfhLmEvtI" version="23.1.6" type="github" pages="2">
+  <diagram name="Page-1" id="_5I97Jr0jwdDMtpRTfRe">
+    <mxGraphModel dx="2454" dy="795" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WDg0ZvPtqjIHyyvJvqL6-1" value="Register" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="30" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="WDg0ZvPtqjIHyyvJvqL6-2" value="pyflyte register ~ pyflyte package + flytectl register" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="130" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WDg0ZvPtqjIHyyvJvqL6-3" value="default: fast registeration&lt;br&gt;(dev changes tasks/workflows&lt;br&gt;&amp;nbsp;without system changes)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-110" y="170" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WDg0ZvPtqjIHyyvJvqL6-4" value="= package and zip up to the directory root (unitl no __init__.py)&lt;br&gt;-&amp;gt; tarball (.tar.gz) file includes serialize tasks (protobuf format),&lt;br&gt;defined workflow. Then register to the cluster, upload tarball file." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="70" y="180" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WDg0ZvPtqjIHyyvJvqL6-5" value="pyflyte package = serialize -&amp;gt; serializable entities for packaging" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-120" y="321" width="352" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-1" value="pyflyte register /directory" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-694" y="464" width="148" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-2" value="find_common_root" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-179" y="442" width="117" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-3" value="if fast registeration" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-308" y="493" width="115" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-4" value="fast_package()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-217" y="738" width="97" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-5" value="upload_file()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-6" y="731" width="84" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-7" value="version_from_hash" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="70" y="833" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OCU6qq7Kj2dt5v6_WY5f-8" value="default options:&lt;br&gt;image: default image&lt;br&gt;output: None&lt;br&gt;destination: /root&lt;br&gt;service_account: &quot;&quot;&lt;br&gt;raw data prefix: &quot;&quot;&lt;br&gt;version: &lt;br&gt;deref_links: False&lt;br&gt;non-fast: False&lt;br&gt;dry run: False&lt;br&gt;skip errors: False&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-721" y="563" width="129" height="185" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="MU9Agu6tMM-13lvCyBpb" name="Page-2">
+    <mxGraphModel dx="2287" dy="1335" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-hEx71a-siTfJKxa_rx_-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="tByBlgErqDnBMsPGyX8j-19" target="-hEx71a-siTfJKxa_rx_-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-19" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-196" y="425" width="158" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="tByBlgErqDnBMsPGyX8j-28" target="tByBlgErqDnBMsPGyX8j-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="-hEx71a-siTfJKxa_rx_-11" target="tByBlgErqDnBMsPGyX8j-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tByBlgErqDnBMsPGyX8j-13" target="-hEx71a-siTfJKxa_rx_-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="131" y="-12" width="421" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-1" value="Kafka" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="317" y="-54" width="49" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-2" value="MindLink EEG Headset" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-185" y="481" width="142" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-3" value="Other devices" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-163" y="534" width="92" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-12" value="publish Message: &lt;br&gt;key: device&#39;s ID&lt;br&gt;value: raw data&lt;br&gt;timestamp: (optional)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-269" y="340" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-14" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="754" y="429" width="512" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-16" value="Spark" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="985.5" y="324" width="49" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-21" value="IoT Devices" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-154" y="444" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-23" value="Topics:&lt;br&gt;MindLink&lt;br&gt;Each device type one topic" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="168" y="32" width="164" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-24" value="Partitions:&lt;br&gt;Messages are partitioned by devices&#39; ID" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="365" y="32" width="152" height="97" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-26" value="Process1:&lt;br&gt;Calculate base on raw data" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="808.5" y="471" width="128" height="93" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-27" value="Process2:&lt;br&gt;Train model" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="980.5" y="481" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-28" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="131" y="429" width="421" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="tByBlgErqDnBMsPGyX8j-31" value="InfluxDB" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="310" y="449" width="63" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="-hEx71a-siTfJKxa_rx_-3" target="-hEx71a-siTfJKxa_rx_-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-109" y="203" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-3" value="Back-end&lt;br&gt;(deployed)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-177" y="242" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-hEx71a-siTfJKxa_rx_-6" target="tByBlgErqDnBMsPGyX8j-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-6" value="Tunneling" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-177" y="70.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-hEx71a-siTfJKxa_rx_-11" value="Telegraf" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="281.5" y="297" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
