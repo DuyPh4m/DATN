@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys
+import json
 from argparse import ArgumentParser, FileType
 from configparser import ConfigParser
 from confluent_kafka import Consumer, OFFSET_BEGINNING
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             consumer.assign(partitions)
 
     # Subscribe to topic
-    topic = "purchases"
+    topic = "test"
     consumer.subscribe([topic], on_assign=reset_offset)
 
     # Poll for new messages from Kafka and print them.
@@ -46,9 +46,9 @@ if __name__ == '__main__':
                 print("ERROR: %s".format(msg.error()))
             else:
                 # Extract the (optional) key and value, and print.
-
-                print("Consumed event from topic {topic}: key = {key:12} value = {value:12}".format(
-                    topic=msg.topic(), key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
+                key = msg.key().decode('utf-8') if msg.key() else None
+                value = json.loads(msg.value().decode('utf-8')) if msg.value() else None
+                print("Produced event to topic {topic}: key = {key:12} value = {value:12}".format(topic=msg.topic(), key=str(key), value=str(value)))
     except KeyboardInterrupt:
         pass
     finally:
