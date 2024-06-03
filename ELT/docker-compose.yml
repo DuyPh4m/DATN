@@ -67,7 +67,7 @@ services:
       resources:
         limits:
           cpus: '2.5'
-          memory: 2G
+          memory: 1.5G
 
   spark-worker2:
     container_name: spark-worker2
@@ -96,7 +96,7 @@ services:
       resources:
         limits:
           cpus: '1.5'
-          memory: 3G
+          memory: 5G
 networks:
   default:
     driver: bridge

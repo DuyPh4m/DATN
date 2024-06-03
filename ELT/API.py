@@ -46,8 +46,16 @@ def receive_data():
 
 @app.route('/api/train', methods=['POST'])
 def train_model():
-    spark_bash = "bash spark/train.sh"
-    process = subprocess.Popen(spark_bash, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    data = request.get_json()
+    user_id = data.get('user_id')
+    model = data.get('model')
+
+    if model == "RandomForest":
+        spark_bash = "bash spark/RandomForestTrain.sh " + user_id
+    if model == "GBTClassifier":
+        spark_bash = "bash spark/GBTClassifierTrain.sh " + user_id
+
+    process = subprocess.Popen(spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
 
     if process.returncode != 0:
@@ -56,13 +64,12 @@ def train_model():
     cluster = Cluster(['localhost'])
     session = cluster.connect('test')
 
-    query = "SELECT * FROM accuracy ORDER BY timestamp DESC LIMIT 1"
+    query = "SELECT * FROM accuracy WHERE user_id = %s ORDER BY timestamp DESC LIMIT 1"
 
-    results = session.execute(query)
+    result = session.execute(query, (user_id,)).one()
+    
 
-    results_dict = {row.key: row.value for row in results}
-
-    return jsonify({"message": "Finshed training model", "result_info": results_dict}), 200
+    return jsonify({"message": "Finshed training model", "accuracy": result.accuracy, "duration": result.duration }), 200
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)

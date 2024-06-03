@@ -1,12 +1,10 @@
 from pyspark.ml import Pipeline
-from pyspark.ml.classification import RandomForestClassifier
+from pyspark.ml.classification import GBTClassifier
 from pyspark.ml.feature import IndexToString, StringIndexer, VectorIndexer, VectorAssembler
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.sql import SparkSession
 from datetime import datetime
-from pyspark.sql.functions import lit
-import datetime
-import requests
+import sys
 
 # Create SparkSession
 spark = (
@@ -17,6 +15,8 @@ spark = (
     .appName("Train Model")
     .getOrCreate()
 )
+
+user_id = sys.argv[1]
 
 # Read records from Cassandra table
 data = (
@@ -39,22 +39,32 @@ feature_cols = ["attention", "meditation", "delta", "theta", "lowalpha", "highal
 # Create a VectorAssembler
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
 
+trainData = assembler.transform(trainData)
+testData = assembler.transform(testData)
+
+# Debug: Print schema and show few rows after transformation
+print("Schema after assembling features:")
+trainData.printSchema()
+print("Sample rows after assembling features:")
+trainData.select("features", label_col).show(5)
+testData.select("features", label_col).show(5)
+
 # Index labels, adding metadata to the label column.
 labelIndexer = StringIndexer(inputCol=label_col, outputCol="indexedLabel").fit(trainData)
 
 # Automatically identify categorical features, and index them.
 featureIndexer = VectorIndexer(inputCol="features", outputCol="indexedFeatures", maxCategories=4).fit(trainData)
 
-# Train a RandomForest model.
-rf = RandomForestClassifier(labelCol="indexedLabel", featuresCol="indexedFeatures", numTrees=10)
+# Train a GBTClassifier model.
+gbt = GBTClassifier(labelCol="indexedLabel", featuresCol="indexedFeatures", maxIter=10)
 
 # Convert indexed labels back to original labels.
 labelConverter = IndexToString(inputCol="prediction", outputCol="predictedLabel", labels=labelIndexer.labels)
 
 # Chain indexers and forest in a Pipeline
-pipeline = Pipeline(stages=[assembler, labelIndexer, featureIndexer, rf, labelConverter])
+pipeline = Pipeline(stages=[labelIndexer, featureIndexer, gbt, labelConverter])
 
-start = datetime.datetime.now()
+start = datetime.now()
 # Train model. This also runs the indexers.
 model = pipeline.fit(trainData)
 
@@ -66,10 +76,18 @@ evaluator = MulticlassClassificationEvaluator(
     labelCol="indexedLabel", predictionCol="prediction", metricName="accuracy")
 accuracy = evaluator.evaluate(predictions)
 
-end = datetime.datetime.now()
+end = datetime.now()
+
+# Debug: Show predictions
+print("Sample predictions:")
+predictions.select("features", "indexedLabel", "prediction", "predictedLabel").show(5)
+
+# Print accuracy
+print(f"Accuracy: {accuracy}")
+print(f"Training duration: {end - start}")
 
 # Create a new DataFrame with the accuracy information
-accuracy_df = spark.createDataFrame([(end, type(model).__name__, accuracy, end - start)], ["timestamp", "model", "accuracy", "duration"])
+accuracy_df = spark.createDataFrame([(end, user_id, type(gbt).__name__, accuracy, str(end - start))], ["timestamp", "user_id", "model", "accuracy", "duration"])
 
 # Write the DataFrame to the accuracy table in Cassandra
 accuracy_df.write \
@@ -81,5 +99,7 @@ accuracy_df.write \
     .mode("append") \
     .save()
 
+save_path = f"./models/{end}_{user_id}"
+
 # Save model
-model.save("./models")
+model.save(save_path)
