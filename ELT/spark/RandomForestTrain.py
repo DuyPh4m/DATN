@@ -40,7 +40,7 @@ data = data.withColumn("classification", data["classification"].cast("int"))
 
 # Split data into train and test with ratio 80:20
 label_col = "classification"
-feature_cols = ["attention", "meditation", "delta", "theta", "lowalpha", "highalpha", "lowbeta", "highbeta", "lowgamma", "middlegamma"]
+feature_cols = ["delta", "theta", "lowalpha", "highalpha", "lowbeta", "highbeta"]
 
 # Create a VectorAssembler
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
@@ -75,7 +75,18 @@ accuracy = evaluator.evaluate(predictions)
 end = datetime.datetime.now()
 
 # Create a new DataFrame with the accuracy information
-accuracy_df = spark.createDataFrame([(end, user_id, type(rf).__name__, accuracy, str(end - start))], ["timestamp", "user_id", "model", "accuracy", "duration"])
+accuracy_df = spark.createDataFrame(
+    [
+        (
+            end,
+            user_id,
+            type(rf).__name__,
+            accuracy,
+            str(end - start),
+        )
+    ],
+    ["timestamp", "user_id", "model", "accuracy", "duration"],
+)
 
 # Write the DataFrame to the accuracy table in Cassandra
 accuracy_df.write \
@@ -87,7 +98,7 @@ accuracy_df.write \
     .mode("append") \
     .save()
 
-save_path = f"./models/{end}_{user_id}"
+save_path = f"/app/models/tmp/{user_id}/RandomForest/{end.strftime('%Y%m%d%H%M%S')}"
 
 # Save model
 model.save(save_path)

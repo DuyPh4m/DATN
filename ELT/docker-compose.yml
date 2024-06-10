@@ -51,6 +51,7 @@ services:
       - SPARK_EVENTLOG_ENABLED=true
     volumes:
       - ./spark:/app
+      - ./.ivy2:/opt/bitnami/spark/.ivy2
     deploy:
       resources:
         limits:
@@ -63,6 +64,9 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./spark:/app
+      - ./.ivy2:/opt/bitnami/spark/.ivy2
     deploy:
       resources:
         limits:
@@ -75,12 +79,14 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./spark:/app
+      - ./.ivy2:/opt/bitnami/spark/.ivy2
     deploy:
       resources:
         limits:
           cpus: '2.5'
           memory: 1.5G  
-
   cassandra:
     container_name: cassandra
     image: cassandra:latest

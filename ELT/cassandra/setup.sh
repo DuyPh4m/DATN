@@ -6,7 +6,7 @@ CASSANDRA_PORT=9042
 
 # Set keyspace and table name
 KEYSPACE=test
-RAW_TABLE=raw
+CLASSIFICATION_TABLE=classify
 LABELED_TABLE=labeled
 ACCURACY_TABLE=accuracy
 
@@ -16,11 +16,11 @@ echo "CREATE KEYSPACE IF NOT EXISTS $KEYSPACE WITH replication = {'class':'Simpl
 # Use keyspace
 echo "USE $KEYSPACE;" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
-# Create raw table
-echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$RAW_TABLE ( timestamp timestamp PRIMARY KEY, attention int, meditation int, delta int, theta int, lowAlpha int, highAlpha int, lowBeta int, highBeta int, lowGamma int, middleGamma int);" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
+# Create prediction table
+echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$CLASSIFICATION_TABLE ( timestamp timestamp, model_name text, user_id text, predicted_label int, PRIMARY KEY (user_id, timestamp));" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
 # Create labeled table
-echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$LABELED_TABLE ( timestamp timestamp PRIMARY KEY, attention int, meditation int, delta int, theta int, lowAlpha int, highAlpha int, lowBeta int, highBeta int, lowGamma int, middleGamma int, classification int);" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
+echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$LABELED_TABLE ( timestamp timestamp PRIMARY KEY, delta float, theta float, lowAlpha float, highAlpha float, lowBeta float, highBeta float, classification int);" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
 # Create accuracy table
 echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$ACCURACY_TABLE ( timestamp timestamp, user_id text, model text, accuracy float, duration text, PRIMARY KEY (user_id, timestamp));" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT

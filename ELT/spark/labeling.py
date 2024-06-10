@@ -12,7 +12,7 @@ spark = (
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0")
     .config("spark.sql.shuffle.partitions", 4)
     .master("spark://spark-master:7077")
-    .appName("Stream Processing")
+    .appName("Labeled Data Stream")
     .getOrCreate()
 )
 spark.sparkContext.setLogLevel("WARN")
@@ -26,20 +26,16 @@ labeled_df = (
     .load()
 )
 
-#Define schema
+# Define schema
 labeled_schema = StructType(
     [
-        StructField("attention", StringType(), True),
-        StructField("meditation", StringType(), True),
         StructField("delta", StringType(), True),
         StructField("theta", StringType(), True),
         StructField("lowalpha", StringType(), True),
         StructField("highalpha", StringType(), True),
         StructField("lowbeta", StringType(), True),
         StructField("highbeta", StringType(), True),
-        StructField("lowgamma", StringType(), True),
-        StructField("middlegamma", StringType(), True),
-        StructField("classification", StringType(), True),
+        StructField("classification", StringType(), True)
     ]
 )
 
@@ -56,17 +52,13 @@ labeled_df = labeled_df.withColumn("value", from_json("value", labeled_schema))
 # Perform processing
 processed_labeled_df = labeled_df.select(
     current_timestamp().alias("timestamp"),
-    labeled_df["value.attention"].cast("int").alias("attention"),
-    labeled_df["value.meditation"].cast("int").alias("meditation"),
     labeled_df["value.delta"].cast("int").alias("delta"),
     labeled_df["value.theta"].cast("int").alias("theta"),
     labeled_df["value.lowalpha"].cast("int").alias("lowalpha"),
     labeled_df["value.highalpha"].cast("int").alias("highalpha"),
     labeled_df["value.lowbeta"].cast("int").alias("lowbeta"),
     labeled_df["value.highbeta"].cast("int").alias("highbeta"),
-    labeled_df["value.lowgamma"].cast("int").alias("lowgamma"),
-    labeled_df["value.middlegamma"].cast("int").alias("middlegamma"),
-    labeled_df["value.classification"].cast("int").alias("classification"),
+    labeled_df["value.classification"].cast("int").alias("classification")
 )
 
 # processed_labeled_df.writeStream.format("console").start()

@@ -5,20 +5,22 @@ import datetime
 # Read the CSV file into a DataFrame
 df = pd.read_csv("./data/labeled_dataset.csv")
 
+# df = df.drop(columns=['attention', 'meditation', 'middlegamma', 'lowgamma'])
+
 # Connect to the Cassandra cluster
 cluster = Cluster(["localhost"])
 session = cluster.connect("test")
 
 # Prepare the insert query
 insert_query = """
-INSERT INTO labeled (timestamp, attention, meditation, delta, theta, lowalpha, highalpha, lowbeta, highbeta, lowgamma, middlegamma, classification)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO labeled (timestamp, delta, theta, lowalpha, highalpha, lowbeta, highbeta, classification)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 """
 prepared = session.prepare(insert_query)
 
 # Insert data into Cassandra
 for _, row in df.iterrows():
-    row_data = [datetime.datetime.now()] + list(row) 
+    row_data = [datetime.datetime.now()] + list(row)
 
     session.execute(prepared, tuple(row_data))
 
