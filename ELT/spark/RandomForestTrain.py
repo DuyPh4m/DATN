@@ -3,8 +3,10 @@ from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.feature import IndexToString, StringIndexer, VectorAssembler
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 import datetime
 import sys
+
 
 # Create SparkSession
 spark = (
@@ -12,7 +14,7 @@ spark = (
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0")
     .config("spark.sql.shuffle.partitions", 4)
     .master("spark://spark-master:7077")
-    .appName("Train Model")
+    .appName("RandomForest Train")
     .getOrCreate()
 )
 
@@ -20,8 +22,7 @@ user_id = sys.argv[1]
 
 # Read records from Cassandra table
 data = (
-    spark.read
-    .format("org.apache.spark.sql.cassandra")
+    spark.read.format("org.apache.spark.sql.cassandra")
     .option("spark.cassandra.connection.host", "cassandra")
     .option("spark.cassandra.connection.port", "9042")
     .option("keyspace", "test")
@@ -33,10 +34,7 @@ data = (
 data = data.drop("timestamp")
 
 # Check for missing or invalid labels
-data = data.na.drop(subset=["classification"])
-
-# Convert label column to integer type if necessary
-data = data.withColumn("classification", data["classification"].cast("int"))
+data = data.na.drop()
 
 # Split data into train and test with ratio 80:20
 label_col = "classification"
@@ -52,10 +50,14 @@ labelIndexer = StringIndexer(inputCol=label_col, outputCol="indexedLabel").fit(d
 (trainData, testData) = data.randomSplit([0.8, 0.2], seed=1234)
 
 # Train a RandomForest model.
-rf = RandomForestClassifier(labelCol="indexedLabel", featuresCol="features", numTrees=10)
+rf = RandomForestClassifier(
+    labelCol="indexedLabel", featuresCol="features", numTrees=10
+)
 
 # Convert indexed labels back to original labels.
-labelConverter = IndexToString(inputCol="prediction", outputCol="predictedLabel", labels=labelIndexer.labels)
+labelConverter = IndexToString(
+    inputCol="prediction", outputCol="predictedLabel", labels=labelIndexer.labels
+)
 
 # Chain indexers and forest in a Pipeline
 pipeline = Pipeline(stages=[labelIndexer, rf, labelConverter])
@@ -69,7 +71,8 @@ predictions = model.transform(testData)
 
 # Evaluate model
 evaluator = MulticlassClassificationEvaluator(
-    labelCol="indexedLabel", predictionCol="prediction", metricName="accuracy")
+    labelCol="indexedLabel", predictionCol="prediction", metricName="accuracy"
+)
 accuracy = evaluator.evaluate(predictions)
 
 end = datetime.datetime.now()
@@ -89,14 +92,13 @@ accuracy_df = spark.createDataFrame(
 )
 
 # Write the DataFrame to the accuracy table in Cassandra
-accuracy_df.write \
-    .format("org.apache.spark.sql.cassandra") \
-    .option("spark.cassandra.connection.host", "cassandra") \
-    .option("spark.cassandra.connection.port", "9042") \
-    .option("keyspace", "test") \
-    .option("table", "accuracy") \
-    .mode("append") \
-    .save()
+accuracy_df.write.format("org.apache.spark.sql.cassandra").option(
+    "spark.cassandra.connection.host", "cassandra"
+).option("spark.cassandra.connection.port", "9042").option("keyspace", "test").option(
+    "table", "accuracy"
+).mode(
+    "append"
+).save()
 
 save_path = f"/app/models/tmp/{user_id}/RandomForest/{end.strftime('%Y%m%d%H%M%S')}"
 

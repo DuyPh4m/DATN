@@ -10,7 +10,6 @@ if (
 ):
     res = response.json()
     print(res["message"])
-    print(res["pid"])
 else:
     print(f"Unexpected response: {response.content}")
 

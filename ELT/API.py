@@ -57,26 +57,15 @@ def pre_labeling():
 
     spark_bash = "bash spark/labeling.sh"
 
-    process = subprocess.Popen(
+    subprocess.Popen(
         spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
-    # stdout, stderr = process.communicate()
-
-    # if process.returncode != 0:
-    #     # error_message = stderr.decode("utf-8")
-    #     # print(f"Error: {error_message}")    
-    #     return (
-    #         jsonify({"error": "Command failed"}),
-    #         500,
-    #     )
-
-    return jsonify({"message": "Label job submit successfully", "pid": process.pid}), 200
+    
+    return jsonify({"message": "Label job submit successfully"}), 200
 
 
 @app.route("/api/stop_labeling", methods=["POST"])
 def stop_labeling():
-    # req = request.get_json()
-    # pid = req.get("pid")
     spark_bash = "bash spark/stop_labeling.sh"
 
     process = subprocess.Popen(
@@ -91,7 +80,7 @@ def stop_labeling():
         )    
 
     return (
-        jsonify({"message": "Labeling job stopped successfully"}),
+        jsonify({"message": "Label job stopped successfully"}),
         200,
     )
 
@@ -99,13 +88,11 @@ def stop_labeling():
 @app.route("/api/labeling", methods=["POST"])
 def receive_labeled_data():
     req = request.get_json()
-    # user_id = req.get("key")
     value = req.get("value")
 
     producer.produce(
         topic="labeled",
         value=json.dumps(value),
-        # key=user_id,
         callback=delivery_callback
     )
 
@@ -113,17 +100,32 @@ def receive_labeled_data():
     return "Labeled data sent successfully", 200
 
 
-@app.route("/api/classify", methods=["POST"])
-def receive_raw_data():
+@app.route("/api/pre_classify", methods=["POST"])
+def pre_classify():
     req = request.get_json()
-    user_id = req.get("key")
-    data = req.get("data")
+    user_id = req.get("user_id")
     model_name = req.get("model_name")
+    spark_bash = f"bash spark/classify.sh {model_name} {user_id}"
+
+    subprocess.Popen(
+        spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+
+    return (
+        jsonify({"message": "Classify job submit successfully"}),
+        200,
+    )
+
+
+@app.route("/api/classify", methods=["POST"])
+def classify():
+    req = request.get_json()
+    user_id = req.get("user_id")
+    value = req.get("value")
 
     producer.produce(
         topic="classify",
-        value=json.dumps(data),
-        key=user_id,
+        value=json.dumps(value),
         callback=delivery_callback,
     )
     producer.flush()
@@ -137,9 +139,9 @@ def receive_raw_data():
     # Query the latest data point
     query = "SELECT * FROM classify WHERE user_id = %s ORDER BY timestamp DESC LIMIT 1"
     statement = SimpleStatement(query)
-    rows = session.execute(statement, (user_id,))
+    row = session.execute(statement, (user_id,)).one()
 
-    for row in rows:
+    if row:
         current_label = row.predicted_label
 
         # Check if the label has changed from 0 to 1 or 1 to 0
@@ -163,26 +165,39 @@ def receive_raw_data():
         # Update previous label
         previous_labels[user_id] = current_label
 
+    return (jsonify({"message": ""}), 200)
+
+
+@app.route("/api/stop_classify", methods=["POST"])
+def stop_classify():
+    spark_bash = "bash spark/stop_classify.sh"
+
+    process = subprocess.Popen(
+        spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    stdout, stderr = process.communicate()
+
+    if process.returncode != 0:
+        return (
+            jsonify({"error": "Command failed", "details": stderr.decode("utf-8")}),
+            500,
+        )
+
     return (
-        jsonify(
-            {
-                "user_id": row.user_id,
-                "timestamp": row.timestamp,
-                "status": current_label,
-            }
-        ),
+        jsonify({"message": "Classify job stopped successfully"}),
         200,
     )
+
 
 @app.route("/api/train", methods=["POST"])
 def train_model():
     req = request.get_json()
     user_id = req.get("user_id")
-    model = req.get("model")
+    model_name = req.get("model_name")
 
-    if model == "RandomForest":
+    if model_name == "RandomForest":
         spark_bash = "bash spark/RandomForestTrain.sh " + user_id
-    if model == "GBTClassifier":
+    if model_name == "GBTClassifier":
         spark_bash = "bash spark/GBTClassifierTrain.sh " + user_id
 
     process = subprocess.Popen(
@@ -204,8 +219,8 @@ def train_model():
         jsonify(
             {
                 "message": "Finished training model",
-                "accuracy": result.accuracy,
-                "duration": result.duration,
+                "accuracy": round(result.accuracy, 3),
+                "duration": result.duration[:10],
             }
         ),
         200,
@@ -233,4 +248,4 @@ def save_model():
     return jsonify({"message": "Model saved successfully"}), 200
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host="0.0.0.0", port=5000)

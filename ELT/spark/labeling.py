@@ -4,7 +4,7 @@ from pyspark.sql.types import StructType, StructField, StringType
 import os
 
 os.environ["PYSPARK_SUBMIT_ARGS"] = (
-    "--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0,com.datastax.spark:spark-cassandra-connector_2.12:3.1.0,org.elasticsearch:elasticsearch-spark-20_2.12:8.11.3 pyspark-shell"
+    "--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0,com.datastax.spark:spark-cassandra-connector_2.12:3.1.0 pyspark-shell"
 )
 
 spark = (
@@ -12,7 +12,7 @@ spark = (
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0")
     .config("spark.sql.shuffle.partitions", 4)
     .master("spark://spark-master:7077")
-    .appName("Labeled Data Stream")
+    .appName("Labeling")
     .getOrCreate()
 )
 spark.sparkContext.setLogLevel("WARN")
@@ -52,12 +52,12 @@ labeled_df = labeled_df.withColumn("value", from_json("value", labeled_schema))
 # Perform processing
 processed_labeled_df = labeled_df.select(
     current_timestamp().alias("timestamp"),
-    labeled_df["value.delta"].cast("int").alias("delta"),
-    labeled_df["value.theta"].cast("int").alias("theta"),
-    labeled_df["value.lowalpha"].cast("int").alias("lowalpha"),
-    labeled_df["value.highalpha"].cast("int").alias("highalpha"),
-    labeled_df["value.lowbeta"].cast("int").alias("lowbeta"),
-    labeled_df["value.highbeta"].cast("int").alias("highbeta"),
+    labeled_df["value.delta"].cast("float").alias("delta"),
+    labeled_df["value.theta"].cast("float").alias("theta"),
+    labeled_df["value.lowalpha"].cast("float").alias("lowalpha"),
+    labeled_df["value.highalpha"].cast("float").alias("highalpha"),
+    labeled_df["value.lowbeta"].cast("float").alias("lowbeta"),
+    labeled_df["value.highbeta"].cast("float").alias("highbeta"),
     labeled_df["value.classification"].cast("int").alias("classification")
 )
 

@@ -9,7 +9,7 @@ with open('./data/labeled_dataset.csv', 'r') as f:
     reader = csv.DictReader(f)
 
     for row in reader:
-        msg = {'type': 'labeled', 'value': row}
+        msg = {'value': row}
         # print(json)
         # print(json.get('key'))
         # print(json.get('value'))

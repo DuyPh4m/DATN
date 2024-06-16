@@ -28,12 +28,13 @@ def get_latest_model_path(model_base_path, model_name):
 
     return latest_model_path
 
+
 spark = (
     SparkSession.builder.config("spark.streaming.stopGracefullyOnShutdown", True)
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0")
     .config("spark.sql.shuffle.partitions", 4)
     .master("spark://spark-master:7077")
-    .appName("Stream Processing")
+    .appName("Classify")
     .getOrCreate()
 )
 spark.sparkContext.setLogLevel("WARN")
@@ -58,7 +59,7 @@ data_schema = StructType(
         StructField("lowalpha", StringType(), True),
         StructField("highalpha", StringType(), True),
         StructField("lowbeta", StringType(), True),
-        StructField("highbeta", StringType(), True)
+        StructField("highbeta", StringType(), True),
     ]
 )
 
@@ -87,7 +88,7 @@ feature_cols = [
 ]
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
 
-train_df = raw_df.select(
+raw_df = raw_df.select(
     raw_df["value.delta"].cast("float").alias("delta"),
     raw_df["value.theta"].cast("float").alias("theta"),
     raw_df["value.lowalpha"].cast("float").alias("lowalpha"),
@@ -95,8 +96,9 @@ train_df = raw_df.select(
     raw_df["value.lowbeta"].cast("float").alias("lowbeta"),
     raw_df["value.highbeta"].cast("float").alias("highbeta"),
 )
+raw_df = raw_df.na.drop()
 
-processed_df = assembler.transform(train_df)
+processed_df = assembler.transform(raw_df)
 
 model = PipelineModel.load(model_path)
 
@@ -106,7 +108,7 @@ result_df = predictions.select(
     current_timestamp().alias("timestamp"),
     lit(model_name).alias("model_name"),
     lit(user_id).alias("user_id"),
-    predictions["predictedLabel"].alias("predicted_label")
+    predictions["predictedLabel"].alias("predicted_label"),
 )
 
 query = (
@@ -120,15 +122,4 @@ query = (
     .start()
 )
 
-timeout = 10000  # 30 seconds
-
-try:
-    query.awaitTermination(timeout)
-    if query.isActive:
-        print("No data received within the timeout period. Terminating the query.")
-        query.stop()
-except KeyboardInterrupt:
-    print("Stream processing terminated by user.")
-
-# Stop the Spark session
-spark.stop()
+query.awaitTermination()
