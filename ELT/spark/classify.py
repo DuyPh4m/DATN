@@ -56,10 +56,10 @@ data_schema = StructType(
     [
         StructField("delta", StringType(), True),
         StructField("theta", StringType(), True),
-        StructField("lowalpha", StringType(), True),
-        StructField("highalpha", StringType(), True),
-        StructField("lowbeta", StringType(), True),
-        StructField("highbeta", StringType(), True),
+        StructField("low_alpha", StringType(), True),
+        StructField("high_alpha", StringType(), True),
+        StructField("low_beta", StringType(), True),
+        StructField("high_beta", StringType(), True),
     ]
 )
 
@@ -81,20 +81,20 @@ model_path = get_latest_model_path(model_base_path, model_name)
 feature_cols = [
     "delta",
     "theta",
-    "lowalpha",
-    "highalpha",
-    "lowbeta",
-    "highbeta",
+    "low_alpha",
+    "high_alpha",
+    "low_beta",
+    "high_beta",
 ]
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
 
 raw_df = raw_df.select(
     raw_df["value.delta"].cast("float").alias("delta"),
     raw_df["value.theta"].cast("float").alias("theta"),
-    raw_df["value.lowalpha"].cast("float").alias("lowalpha"),
-    raw_df["value.highalpha"].cast("float").alias("highalpha"),
-    raw_df["value.lowbeta"].cast("float").alias("lowbeta"),
-    raw_df["value.highbeta"].cast("float").alias("highbeta"),
+    raw_df["value.low_alpha"].cast("float").alias("low_alpha"),
+    raw_df["value.high_alpha"].cast("float").alias("high_alpha"),
+    raw_df["value.low_beta"].cast("float").alias("low_beta"),
+    raw_df["value.high_beta"].cast("float").alias("high_beta"),
 )
 raw_df = raw_df.na.drop()
 

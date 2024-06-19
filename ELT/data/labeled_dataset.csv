@@ -1,4 +1,4 @@
-delta,theta,lowalpha,highalpha,lowbeta,highbeta,classification
+delta,theta,low_alpha,high_alpha,low_beta,high_beta,classification
 960462,277180,26575,27356,26575,13056,0
 39145,28225,20172,39551,20172,9933,0
 75410,43144,8601,13564,8601,11663,0

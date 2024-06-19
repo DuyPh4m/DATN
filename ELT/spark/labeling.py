@@ -31,10 +31,10 @@ labeled_schema = StructType(
     [
         StructField("delta", StringType(), True),
         StructField("theta", StringType(), True),
-        StructField("lowalpha", StringType(), True),
-        StructField("highalpha", StringType(), True),
-        StructField("lowbeta", StringType(), True),
-        StructField("highbeta", StringType(), True),
+        StructField("low_alpha", StringType(), True),
+        StructField("high_alpha", StringType(), True),
+        StructField("low_beta", StringType(), True),
+        StructField("high_beta", StringType(), True),
         StructField("classification", StringType(), True)
     ]
 )
@@ -54,10 +54,10 @@ processed_labeled_df = labeled_df.select(
     current_timestamp().alias("timestamp"),
     labeled_df["value.delta"].cast("float").alias("delta"),
     labeled_df["value.theta"].cast("float").alias("theta"),
-    labeled_df["value.lowalpha"].cast("float").alias("lowalpha"),
-    labeled_df["value.highalpha"].cast("float").alias("highalpha"),
-    labeled_df["value.lowbeta"].cast("float").alias("lowbeta"),
-    labeled_df["value.highbeta"].cast("float").alias("highbeta"),
+    labeled_df["value.low_alpha"].cast("float").alias("low_alpha"),
+    labeled_df["value.high_alpha"].cast("float").alias("high_alpha"),
+    labeled_df["value.low_beta"].cast("float").alias("low_beta"),
+    labeled_df["value.high_beta"].cast("float").alias("high_beta"),
     labeled_df["value.classification"].cast("int").alias("classification")
 )
 

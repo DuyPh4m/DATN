@@ -195,10 +195,12 @@ def train_model():
     user_id = req.get("user_id")
     model_name = req.get("model_name")
 
-    if model_name == "RandomForest":
-        spark_bash = "bash spark/RandomForestTrain.sh " + user_id
-    if model_name == "GBTClassifier":
-        spark_bash = "bash spark/GBTClassifierTrain.sh " + user_id
+    spark_bash = f"bash spark/{model_name}Train.sh {user_id}"
+    
+    # if model_name == "RandomForest":
+    #     spark_bash = "bash spark/RandomForestTrain.sh " + user_id
+    # if model_name == "GBTClassifier":
+    #     spark_bash = "bash spark/GBTClassifierTrain.sh " + user_id
 
     process = subprocess.Popen(
         spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE

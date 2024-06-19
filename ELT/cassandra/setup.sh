@@ -20,10 +20,10 @@ echo "USE $KEYSPACE;" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$CLASSIFICATION_TABLE ( timestamp timestamp, model_name text, user_id text, predicted_label int, PRIMARY KEY (user_id, timestamp));" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
 # Create labeled table
-echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$LABELED_TABLE ( timestamp timestamp PRIMARY KEY, delta float, theta float, lowAlpha float, highAlpha float, lowBeta float, highBeta float, classification int);" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
+echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$LABELED_TABLE ( timestamp timestamp PRIMARY KEY, delta float, theta float, low_alpha float, high_alpha float, low_beta float, high_beta float, classification int);" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
 # Create accuracy table
-echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$ACCURACY_TABLE ( timestamp timestamp, user_id text, model text, accuracy float, duration text, PRIMARY KEY (user_id, timestamp));" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
+echo "CREATE TABLE IF NOT EXISTS $KEYSPACE.$ACCURACY_TABLE ( timestamp timestamp, user_id text, model_name text, accuracy float, duration text, PRIMARY KEY (user_id, timestamp));" | cqlsh $CASSANDRA_HOST $CASSANDRA_PORT
 
 
 if [ $? -eq 0 ]

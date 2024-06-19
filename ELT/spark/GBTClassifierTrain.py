@@ -44,7 +44,7 @@ data = data.na.drop()
 (trainData, testData) = data.randomSplit([0.8, 0.2], seed=1234)
 
 label_col = "classification"
-feature_cols = ["delta", "theta", "lowalpha", "highalpha", "lowbeta", "highbeta"]
+feature_cols = ["delta", "theta", "low_alpha", "high_alpha", "low_beta", "high_beta"]
 
 # Create a VectorAssembler
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")

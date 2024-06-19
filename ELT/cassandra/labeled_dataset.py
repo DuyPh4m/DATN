@@ -13,7 +13,7 @@ session = cluster.connect("test")
 
 # Prepare the insert query
 insert_query = """
-INSERT INTO labeled (timestamp, delta, theta, lowalpha, highalpha, lowbeta, highbeta, classification)
+INSERT INTO labeled (timestamp, delta, theta, low_alpha, high_alpha, low_beta, high_beta, classification)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 """
 prepared = session.prepare(insert_query)
