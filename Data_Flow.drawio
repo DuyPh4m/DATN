@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-06-19T15:03:08.895Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="YqCmBWJQ45F2j496NPjF" version="24.5.5" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-19T16:07:10.031Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="lmSl5rkSWcarhki7Vfwk" version="24.5.5" type="github">
   <diagram id="MU9Agu6tMM-13lvCyBpb" name="Page-2">
-    <mxGraphModel dx="3108" dy="1622" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2434" dy="1570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -75,6 +75,27 @@
         </mxCell>
         <mxCell id="S8vObqpAsYyYiZip6gTa-9" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://tenten.vn/tin-tuc/wp-content/uploads/2021/03/Firebase-la%CC%80-gi%CC%80-Gia%CC%89i-pha%CC%81p-la%CC%A3%CC%82p-tri%CC%80nh-kho%CC%82ng-ca%CC%82%CC%80n-Backend-tu%CC%9B%CC%80-Google-4.png;container=0;" parent="1" vertex="1">
           <mxGeometry x="-876" y="-32" width="251.99" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="tGgB-5F8hRr1pIuJ4x4h-1" target="tGgB-5F8hRr1pIuJ4x4h-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-1" value="Lớp Ứng dụng" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-780" y="590" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="tGgB-5F8hRr1pIuJ4x4h-2" target="tGgB-5F8hRr1pIuJ4x4h-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-2" value="Lớp Giao tiếp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-590" y="590" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="tGgB-5F8hRr1pIuJ4x4h-3" target="tGgB-5F8hRr1pIuJ4x4h-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-3" value="Lớp Xử lý và Phân tích" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-400" y="590" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tGgB-5F8hRr1pIuJ4x4h-4" value="Lớp Lưu trữ" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-210" y="590" width="150" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
