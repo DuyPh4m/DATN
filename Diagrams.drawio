@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-07-07T16:15:36.684Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="bsEk38jXN3BZZthxUfIK" version="24.6.4" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2024-07-07T16:27:57.004Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="rz5vRoKEmvbzUWDXI-CE" version="24.6.4" type="github" pages="12">
   <diagram name="Overview" id="tAiGIgQMHPT6lsw3tZEA">
     <mxGraphModel dx="954" dy="581" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -1066,7 +1066,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="df4bQrwH__06eeeGZ9U5" name="Storage Layer">
-    <mxGraphModel dx="954" dy="558" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
