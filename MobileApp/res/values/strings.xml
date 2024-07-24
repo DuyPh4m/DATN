@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FocusMate</string>
+    <string-array name="list_labels_status">
+        <item>Buồn ngủ</item>
+        <item>Tỉnh táo</item>
+    </string-array>
+    <string-array name="list_models">
+        <item>RandomForest</item>
+        <item>GBTClassifier</item>
+    </string-array>
+    <string name="IP">192.168.195.185</string>
+    <string name="train_finish">Hoàn thành huấn luyện mô hình</string>
+    <string name="sign_up">Tạo tài khoản mới</string>
+    <string name="email">Email</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="app_desc">Keep Awake Keep Going</string>
+    <string name="app_image_desc">App Image</string>
+    <string name="birth_of_date">Ngày sinh</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="gender">Giới tính</string>
+
+</resources>
