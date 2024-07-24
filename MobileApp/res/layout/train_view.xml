@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TrainActivity">
+
+    <TextView
+        android:id="@+id/modelsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Huấn luyện mô hình"
+        android:textColor="@color/textColor"
+        android:textSize="32sp" />
+
+    <ImageView
+        android:id="@+id/modelImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/modelsTitle"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/machine_learning" />
+
+    <TextView
+        android:id="@+id/tv_models_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/modelImage"
+        android:layout_marginTop="10dp"
+        android:text="Chọn mô hình huấn luyện"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/models_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@+id/tv_models_label"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/list_models"
+        android:gravity="center|end"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <TextView
+        android:id="@+id/tv_accuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/models_spinner"
+        android:layout_toLeftOf="@+id/btn_start_train"
+        android:layout_marginTop="10dp"
+        android:text="Độ chính xác:"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_model_accuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/models_spinner"
+        android:layout_marginTop="10dp"
+        android:text="0.0"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_model_accuracy"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:layout_toStartOf="@+id/btn_start_train"
+        android:text="Thời gian:" />
+
+    <TextView
+        android:id="@+id/tv_train_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_model_accuracy"
+        android:layout_marginTop="8dp"
+        android:text="0.0"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_start_train"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btn_save_model"
+        android:layout_alignEnd="@+id/btn_save_model"
+        android:layout_below="@+id/tv_train_duration"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="Bắt đầu"
+        android:background="@drawable/btn_background_color"
+
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_save_model"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_start_train"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:text="Lưu mô hình"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_finish_train"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_save_model"
+        android:layout_alignStart="@+id/btn_save_model"
+        android:layout_alignEnd="@+id/btn_save_model"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:text="Kết thúc"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+<!--    android:backgroundTint="@color/buttonColor"-->
+
+    <TextView
+        android:id="@+id/tv_train_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_finish_train"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+</RelativeLayout>

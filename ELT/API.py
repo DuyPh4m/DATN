@@ -97,7 +97,7 @@ def receive_labeled_data():
     )
 
     producer.flush()
-    return "Labeled data sent successfully", 200
+    return jsonify({"message": "Labeled data sent successfully"}), 200
 
 
 @app.route("/api/pre_classify", methods=["POST"])
@@ -154,8 +154,8 @@ def classify():
             return (
                 jsonify(
                     {
-                        "user_id": row.user_id,
-                        "timestamp": row.timestamp,
+                        # "user_id": row.user_id,
+                        # "timestamp": row.timestamp,
                         "status": current_label,
                     }
                 ),
@@ -165,7 +165,7 @@ def classify():
         # Update previous label
         previous_labels[user_id] = current_label
 
-    return (jsonify({"message": ""}), 200)
+    return (jsonify({"status": current_label}), 200)
 
 
 @app.route("/api/stop_classify", methods=["POST"])
@@ -213,7 +213,7 @@ def train_model():
             500,
         )
 
-    query = "SELECT * FROM accuracy WHERE user_id = %s ORDER BY timestamp DESC LIMIT 1"
+    query = "SELECT * FROM metrics WHERE user_id = %s ORDER BY timestamp DESC LIMIT 1"
 
     result = session.execute(query, (user_id,)).one()
 
@@ -222,6 +222,8 @@ def train_model():
             {
                 "message": "Finished training model",
                 "accuracy": round(result.accuracy, 3),
+                "weighted_recall": round(result.weighted_recall, 3),
+                "f1_score": round(result.f1_score, 3),
                 "duration": result.duration[:10],
             }
         ),
@@ -248,6 +250,33 @@ def save_model():
         )
 
     return jsonify({"message": "Model saved successfully"}), 200
+
+
+@app.route("/api/stop_train", methods=["POST"])
+def stop_train():
+    req = request.get_json()
+    model_name = req.get("model_name")
+
+    train_process = model_name + 'Train.py'
+
+    spark_bash = "bash spark/stop_train.sh " + train_process
+
+    process = subprocess.Popen(
+        spark_bash, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    stdout, stderr = process.communicate()
+
+    if process.returncode != 0:
+        return (
+            jsonify({"error": "Command failed", "details": stderr.decode("utf-8")}),
+            500,
+        )
+
+    return (
+        jsonify({"message": "Train job stopped successfully"}),
+        200,
+    )
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

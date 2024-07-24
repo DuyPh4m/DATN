@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LabelActivity">
+
+    <TextView
+        android:id="@+id/labelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Gán nhãn dữ liệu"
+        android:textColor="@color/textColor"
+        android:textSize="32sp" />
+
+    <ImageView
+        android:id="@+id/labelImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/labelTitle"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/label" />
+
+    <TextView
+        android:id="@+id/tv_choose_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/labelImage"
+        android:layout_marginTop="20dp"
+        android:text="Chọn trạng thái"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/label_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@+id/tv_choose_label"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/list_labels_status"
+        android:gravity="center|end"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <Button
+        android:id="@+id/btn_start_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btn_finish_label"
+        android:layout_alignEnd="@+id/btn_finish_label"
+        android:layout_below="@+id/label_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Bắt đầu"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_stop_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btn_finish_label"
+        android:layout_alignEnd="@id/btn_finish_label"
+        android:layout_below="@+id/btn_start_label"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_background_color"
+        android:layout_centerHorizontal="true"
+        android:text="Dừng"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_finish_label"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_stop_label"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_background_color"
+        android:layout_centerHorizontal="true"
+        android:text="Kết thúc"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_label_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_finish_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -1,6 +1,6 @@
 import csv
-import requests
-import sys
+# import requests
+# import sys
 from confluent_kafka import Producer
 import json
 

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LabelActivity">
+
+    <TextView
+        android:id="@+id/ClasifyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:gravity="center|center_horizontal"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Đánh giá trạng thái"
+        android:textColor="@color/textColor"
+        android:textSize="32sp" />
+
+    <ImageView
+        android:id="@+id/classifyImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/ClasifyTitle"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/classification" />
+
+    <TextView
+        android:id="@+id/tv_classify_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/classifyImage"
+        android:layout_marginTop="20dp"
+        android:text="Chọn mô hình"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+
+    <Spinner
+        android:id="@+id/models_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_below="@+id/tv_classify_label"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/list_models"
+        android:gravity="center|end"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <TextView
+        android:id="@+id/tv_classify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/models_spinner"
+        android:layout_toLeftOf="@+id/tv_classify_label"
+        android:layout_marginTop="20dp"
+        android:text="Trạng thái:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_classify_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/models_spinner"
+        android:layout_marginTop="20dp"
+        android:text="--"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_start_classify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_classify_result"
+        android:layout_alignStart="@+id/btn_finish_classify"
+        android:layout_alignEnd="@+id/btn_finish_classify"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Bắt đầu"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_stop_classify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_start_classify"
+        android:layout_alignStart="@+id/btn_finish_classify"
+        android:layout_alignEnd="@+id/btn_finish_classify"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:text="Dừng"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_finish_classify"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_stop_classify"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:text="Kết thúc"
+        android:background="@drawable/btn_background_color"
+        android:textColor="#ffffffff"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_classify_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_finish_classify"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+</RelativeLayout>
+
