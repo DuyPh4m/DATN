@@ -1,0 +1,29 @@
+"filename", "language", "Python", "pip requirements", "YAML", "Shell Script", "comment", "blank", "total"
+"/home/william/Documents/DATN/ELT/API.py", "Python", 179, 0, 0, 0, 16, 57, 252
+"/home/william/Documents/DATN/ELT/cassandra/labeled_dataset.py", "Python", 15, 0, 0, 0, 6, 8, 29
+"/home/william/Documents/DATN/ELT/cassandra/setup.sh", "Shell Script", 0, 0, 0, 18, 8, 9, 35
+"/home/william/Documents/DATN/ELT/classify_test.py", "Python", 13, 0, 0, 0, 11, 9, 33
+"/home/william/Documents/DATN/ELT/docker-compose.yml", "YAML", 0, 0, 103, 0, 0, 5, 108
+"/home/william/Documents/DATN/ELT/kafka/setup.sh", "Shell Script", 0, 0, 0, 11, 0, 3, 14
+"/home/william/Documents/DATN/ELT/labeling_test.py", "Python", 9, 0, 0, 0, 4, 7, 20
+"/home/william/Documents/DATN/ELT/pre_classify_test.py", "Python", 14, 0, 0, 0, 1, 5, 20
+"/home/william/Documents/DATN/ELT/pre_labeling_test.py", "Python", 10, 0, 0, 0, 1, 5, 16
+"/home/william/Documents/DATN/ELT/requirements.txt", "pip requirements", 0, 5, 0, 0, 0, 1, 6
+"/home/william/Documents/DATN/ELT/save_model_test.py", "Python", 15, 0, 0, 0, 0, 5, 20
+"/home/william/Documents/DATN/ELT/spark/GBTClassifierTrain.py", "Python", 79, 0, 0, 0, 28, 26, 133
+"/home/william/Documents/DATN/ELT/spark/GBTClassifierTrain.sh", "Shell Script", 0, 0, 0, 10, 0, 2, 12
+"/home/william/Documents/DATN/ELT/spark/RandomForestTrain.py", "Python", 70, 0, 0, 0, 15, 22, 107
+"/home/william/Documents/DATN/ELT/spark/RandomForestTrain.sh", "Shell Script", 0, 0, 0, 10, 0, 2, 12
+"/home/william/Documents/DATN/ELT/spark/classify.py", "Python", 93, 0, 0, 0, 5, 28, 126
+"/home/william/Documents/DATN/ELT/spark/classify.sh", "Shell Script", 0, 0, 0, 11, 0, 2, 13
+"/home/william/Documents/DATN/ELT/spark/labeling.py", "Python", 57, 0, 0, 0, 10, 11, 78
+"/home/william/Documents/DATN/ELT/spark/labeling.sh", "Shell Script", 0, 0, 0, 9, 0, 1, 10
+"/home/william/Documents/DATN/ELT/spark/save_model.py", "Python", 25, 0, 0, 0, 6, 15, 46
+"/home/william/Documents/DATN/ELT/spark/save_model.sh", "Shell Script", 0, 0, 0, 11, 0, 2, 13
+"/home/william/Documents/DATN/ELT/spark/stop_classify.sh", "Shell Script", 0, 0, 0, 10, 0, 1, 11
+"/home/william/Documents/DATN/ELT/spark/stop_labeling.sh", "Shell Script", 0, 0, 0, 10, 0, 1, 11
+"/home/william/Documents/DATN/ELT/stop_classify_test.py", "Python", 10, 0, 0, 0, 0, 5, 15
+"/home/william/Documents/DATN/ELT/stop_labeling_test.py", "Python", 10, 0, 0, 0, 0, 5, 15
+"/home/william/Documents/DATN/ELT/test.py", "Python", 17, 0, 0, 0, 6, 8, 31
+"/home/william/Documents/DATN/ELT/train_test.py", "Python", 17, 0, 0, 0, 0, 6, 23
+"Total", "-", 633, 5, 103, 100, 117, 251, 1209

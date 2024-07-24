@@ -1,0 +1,58 @@
+Date : 2024-06-19 14:28:11
+Directory : /home/william/Documents/DATN/ELT
+Total : 27 files,  841 codes, 117 comments, 251 blanks, all 1209 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |         16 |        633 |        109 |        222 |        964 |
+| YAML             |          1 |        103 |          0 |          5 |        108 |
+| Shell Script     |          9 |        100 |          8 |         23 |        131 |
+| pip requirements |          1 |          5 |          0 |          1 |          6 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                             |         27 |        841 |        117 |        251 |      1,209 |
+| . (Files)                                                     |         12 |        402 |         39 |        118 |        559 |
+| cassandra                                                     |          2 |         33 |         14 |         17 |         64 |
+| kafka                                                         |          1 |         11 |          0 |          3 |         14 |
+| spark                                                         |         12 |        395 |         64 |        113 |        572 |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                      | language         | code       | comment    | blank      | total      |
++---------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /home/william/Documents/DATN/ELT/API.py                       | Python           |        179 |         16 |         57 |        252 |
+| /home/william/Documents/DATN/ELT/cassandra/labeled_dataset.py | Python           |         15 |          6 |          8 |         29 |
+| /home/william/Documents/DATN/ELT/cassandra/setup.sh           | Shell Script     |         18 |          8 |          9 |         35 |
+| /home/william/Documents/DATN/ELT/classify_test.py             | Python           |         13 |         11 |          9 |         33 |
+| /home/william/Documents/DATN/ELT/docker-compose.yml           | YAML             |        103 |          0 |          5 |        108 |
+| /home/william/Documents/DATN/ELT/kafka/setup.sh               | Shell Script     |         11 |          0 |          3 |         14 |
+| /home/william/Documents/DATN/ELT/labeling_test.py             | Python           |          9 |          4 |          7 |         20 |
+| /home/william/Documents/DATN/ELT/pre_classify_test.py         | Python           |         14 |          1 |          5 |         20 |
+| /home/william/Documents/DATN/ELT/pre_labeling_test.py         | Python           |         10 |          1 |          5 |         16 |
+| /home/william/Documents/DATN/ELT/requirements.txt             | pip requirements |          5 |          0 |          1 |          6 |
+| /home/william/Documents/DATN/ELT/save_model_test.py           | Python           |         15 |          0 |          5 |         20 |
+| /home/william/Documents/DATN/ELT/spark/GBTClassifierTrain.py  | Python           |         79 |         28 |         26 |        133 |
+| /home/william/Documents/DATN/ELT/spark/GBTClassifierTrain.sh  | Shell Script     |         10 |          0 |          2 |         12 |
+| /home/william/Documents/DATN/ELT/spark/RandomForestTrain.py   | Python           |         70 |         15 |         22 |        107 |
+| /home/william/Documents/DATN/ELT/spark/RandomForestTrain.sh   | Shell Script     |         10 |          0 |          2 |         12 |
+| /home/william/Documents/DATN/ELT/spark/classify.py            | Python           |         93 |          5 |         28 |        126 |
+| /home/william/Documents/DATN/ELT/spark/classify.sh            | Shell Script     |         11 |          0 |          2 |         13 |
+| /home/william/Documents/DATN/ELT/spark/labeling.py            | Python           |         57 |         10 |         11 |         78 |
+| /home/william/Documents/DATN/ELT/spark/labeling.sh            | Shell Script     |          9 |          0 |          1 |         10 |
+| /home/william/Documents/DATN/ELT/spark/save_model.py          | Python           |         25 |          6 |         15 |         46 |
+| /home/william/Documents/DATN/ELT/spark/save_model.sh          | Shell Script     |         11 |          0 |          2 |         13 |
+| /home/william/Documents/DATN/ELT/spark/stop_classify.sh       | Shell Script     |         10 |          0 |          1 |         11 |
+| /home/william/Documents/DATN/ELT/spark/stop_labeling.sh       | Shell Script     |         10 |          0 |          1 |         11 |
+| /home/william/Documents/DATN/ELT/stop_classify_test.py        | Python           |         10 |          0 |          5 |         15 |
+| /home/william/Documents/DATN/ELT/stop_labeling_test.py        | Python           |         10 |          0 |          5 |         15 |
+| /home/william/Documents/DATN/ELT/test.py                      | Python           |         17 |          6 |          8 |         31 |
+| /home/william/Documents/DATN/ELT/train_test.py                | Python           |         17 |          0 |          6 |         23 |
+| Total                                                         |                  |        841 |        117 |        251 |      1,209 |
++---------------------------------------------------------------+------------------+------------+------------+------------+------------+
